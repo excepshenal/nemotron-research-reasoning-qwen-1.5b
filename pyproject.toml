@@ -5,5 +5,6 @@ description = "dshen reproduction of nemotron-research-reasoning-qwen-1-5b from 
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "datasets>=4.1.0",
     "huggingface-hub>=0.34.5",
 ]
