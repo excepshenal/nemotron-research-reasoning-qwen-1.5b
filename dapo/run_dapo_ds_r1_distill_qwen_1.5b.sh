@@ -13,12 +13,14 @@ RUNTIME_ENV=${RUNTIME_ENV:-"${WORKING_DIR}/dapo/runtime_env.yaml"}
 # Paths
 RAY_DATA_HOME=${RAY_DATA_HOME:-"${HOME}/nemotron-research-reasoning-qwen-1.5b"}
 TRAIN_FILE=${TRAIN_FILE:-"${RAY_DATA_HOME}/data/deepscaler/train.parquet"}
+TEST_FILE=${TEST_FILE:-"${RAY_DATA_HOME}/data/aime24/test.parquet"}
 
 
 ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     --working-dir "${WORKING_DIR}" \
     -- python3 -m verl.recipe.dapo.main_dapo \
     data.train_files="${TRAIN_FILE}" \
+    data.val_files="${TEST_FILE}" \
     custom_reward_function.path=${PROJECT_DIR}/reward/rllm_reward.py \
     custom_reward_function.name=rllm_reward_fn_math_transformed \
 
