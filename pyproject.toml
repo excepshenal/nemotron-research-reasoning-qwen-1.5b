@@ -9,3 +9,6 @@ dependencies = [
     "huggingface-hub>=0.34.5",
     "rllm @ git+https://github.com/rllm-org/rllm.git",
 ]
+
+[tool.uv.extra-build-dependencies]
+flash-attn = ["torch"]
