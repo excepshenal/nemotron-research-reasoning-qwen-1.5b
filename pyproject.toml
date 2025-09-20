@@ -7,4 +7,5 @@ requires-python = ">=3.13"
 dependencies = [
     "datasets>=4.1.0",
     "huggingface-hub>=0.34.5",
+    "rllm @ git+https://github.com/rllm-org/rllm.git",
 ]
