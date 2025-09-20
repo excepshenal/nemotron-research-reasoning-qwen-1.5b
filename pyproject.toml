@@ -3,7 +3,7 @@ name = "dshen-nemotron"
 version = "0.1.0"
 description = "dshen reproduction of nemotron-research-reasoning-qwen-1-5b from 'Scaling Up RL'"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = "==3.11.*"
 dependencies = [
     "datasets>=4.1.0",
     "huggingface-hub>=0.34.5",
