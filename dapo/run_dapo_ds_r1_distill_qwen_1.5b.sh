@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -xeuo pipefail
 
+PROJECT_DIR=${PROJECT_DIR:-"${PWD}/nemotron-research-reasoning-qwen-1.5b"}
+
 project_name='DAPO'
 exp_name='DAPO-DS-R1-Distill-Qwen-1.5B'
 
@@ -17,4 +19,6 @@ ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     --working-dir "${WORKING_DIR}" \
     -- python3 -m verl.recipe.dapo.main_dapo \
     data.train_files="${TRAIN_FILE}" \
+    custom_reward_function.path=${PROJECT_DIR}/data_preprocess/deepscaler_dataset.py \
+    custom_reward_function.name=rllm_reward_fn_math_transformed \
 
