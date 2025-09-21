@@ -25,6 +25,18 @@ kl_loss_coef=0.0001
 
 actor_optim_lr=2e-6
 
+# Rollout
+
+n_resp_per_prompt=16
+temperature=1.2
+
+# actor params should hopefully fit in remaining 35% of H100 given it's 1.5b model.
+# this is within range of verl/docs/perf/perf_tuning.rst, but may be risky
+gpu_memory_utilization=0.65
+rollout_disable_log_stats=False # per verl/docs/perf/perf_tuning.rst
+enable_chunked_prefill=False # prompts are short
+tensor_model_parallel_size=1 # 1.5b model doesn't need TP
+
 # Filepaths
 
 PROJECT_DIR=${PROJECT_DIR:-"${HOME}/nemotron-research-reasoning-qwen-1.5b"}
@@ -63,5 +75,12 @@ ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     actor_rollout_ref.actor.kl_loss_coef=${kl_loss_coef} \
     actor_rollout_ref.actor.use_torch_compile=True \
     actor_rollout_ref.actor.optim.lr=${actor_optim_lr} \
+    actor_rollout_ref.rollout.n=${n_resp_per_prompt} \
+    actor_rollout_ref.rollout.temperature=${temperature} \
+    actor_rollout_ref.rollout.gpu_memory_utilization=${gpu_memory_utilization} \
+    actor_rollout_ref.rollout.disable_log_stats=${rollout_disable_log_stats} \
+    actor_rollout_ref.rollout.enforce_eager=False \
+    actor_rollout_ref.rollout.enable_chunked_prefill=${enable_chunked_prefill} \
+    actor_rollout_ref.rollout.tensor_model_parallel_size=${tensor_model_parallel_size} \
     custom_reward_function.path=${PROJECT_DIR}/reward/rllm_reward.py \
     custom_reward_function.name=rllm_reward_fn_math_transformed \
