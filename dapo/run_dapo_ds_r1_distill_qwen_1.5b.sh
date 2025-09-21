@@ -17,6 +17,8 @@ train_prompt_mini_bsz=64
 # use dynamic micro batch size
 ppo_max_token_len_per_gpu=16384 # from verl example dapo scripts
 
+MODEL_PATH=${WORKING_DIR:-"~/models/ds-r1-distill-qwen-1.5b"}
+
 # Ray
 RAY_ADDRESS=${RAY_ADDRESS:-"http://localhost:8265"}
 WORKING_DIR=${WORKING_DIR:-"${PWD}"}
@@ -36,6 +38,7 @@ ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     data.max_prompt_length=${max_prompt_length} \
     data.max_response_length=${max_response_length} \
     data.train_batch_size=${train_prompt_bsz} \
+    actor_rollout_ref.model.path=${MODEL_PATH} \
     actor_rollout_ref.actor.ppo_mini_batch_size=${train_prompt_mini_bsz} \
     actor_rollout_ref.actor.use_dynamic_bsz=True \
     actor_rollout_ref.actor.ppo_max_token_len_per_gpu=${ppo_max_token_len_per_gpu} \
