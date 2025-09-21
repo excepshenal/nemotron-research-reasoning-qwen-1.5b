@@ -11,6 +11,12 @@ max_prompt_length=1024
 # "Scaling Up RL" sets context window limit at 8096
 max_response_length=$((8096 - 1024))
 
+# Batch size params from "Scaling Up RL" paper
+train_prompt_bsz=256
+train_prompt_mini_bsz=64
+# use dynamic micro batch size
+ppo_max_token_len_per_gpu=16384 # from verl example dapo scripts
+
 # Ray
 RAY_ADDRESS=${RAY_ADDRESS:-"http://localhost:8265"}
 WORKING_DIR=${WORKING_DIR:-"${PWD}"}
@@ -29,6 +35,10 @@ ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     data.prompt_key=prompt \
     data.max_prompt_length=${max_prompt_length} \
     data.max_response_length=${max_response_length} \
+    data.train_batch_size=${train_prompt_bsz} \
+    actor_rollout_ref.actor.ppo_mini_batch_size=${train_prompt_mini_bsz} \
+    actor_rollout_ref.actor.use_dynamic_bsz=True \
+    actor_rollout_ref.actor.ppo_max_token_len_per_gpu=${ppo_max_token_len_per_gpu} \
     custom_reward_function.path=${PROJECT_DIR}/reward/rllm_reward.py \
     custom_reward_function.name=rllm_reward_fn_math_transformed \
 
