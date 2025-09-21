@@ -54,6 +54,8 @@ RUNTIME_ENV=${RUNTIME_ENV:-"${PROJECT_DIR}/dapo/runtime_env.yaml"}
 # Some defaults include:
 # - actor_rollout_ref.actor.strategy: fsdp
 # - fsdp offload params: False (unnecessary for 1.5b model)
+# - actor_rollout_ref.rollout.val_kwargs.do_sample: False
+#   ("Scaling Up RL" samples for final eval, but doesn't clarify how they eval during training)
 ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     --working-dir "${WORKING_DIR}" \
     -- python3 -m verl.recipe.dapo.main_dapo \
