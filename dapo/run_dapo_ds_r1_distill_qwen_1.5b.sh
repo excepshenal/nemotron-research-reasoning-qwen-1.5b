@@ -84,5 +84,7 @@ ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     actor_rollout_ref.rollout.enforce_eager=False \
     actor_rollout_ref.rollout.enable_chunked_prefill=${enable_chunked_prefill} \
     actor_rollout_ref.rollout.tensor_model_parallel_size=${tensor_model_parallel_size} \
+    reward_model.reward_manager=dapo \
+    algorithm.adv_estimator=grpo \
     custom_reward_function.path=${PROJECT_DIR}/reward/rllm_reward.py \
     custom_reward_function.name=rllm_reward_fn_math_transformed \
