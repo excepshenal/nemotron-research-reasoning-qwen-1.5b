@@ -70,7 +70,7 @@ RUNTIME_ENV=${RUNTIME_ENV:-"${PROJECT_DIR}/dapo/runtime_env.yaml"}
 #   ("Scaling Up RL" samples for final eval, but doesn't clarify how they eval during training)
 ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     --working-dir "${WORKING_DIR}" \
-    -- python3 -m verl.recipe.dapo.main_dapo \
+    -- python3 verl/recipe/dapo/main_dapo.py \
     data.train_files="${TRAIN_FILE}" \
     data.val_files="${TEST_FILE}" \
     data.prompt_key=prompt \
