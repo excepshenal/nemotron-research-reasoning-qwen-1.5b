@@ -15,7 +15,7 @@ from huggingface_hub import snapshot_download
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--hf_repo", default="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")
-    parser.add_argument("--local_dir", default="~/models/ds-r1-distill-qwen-1.5b")
+    parser.add_argument("--local_dir", default="/models/ds-r1-distill-qwen-1.5b")
 
     args = parser.parse_args()
 

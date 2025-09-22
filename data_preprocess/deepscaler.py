@@ -14,7 +14,7 @@ def main():
     data_source = "agentica-org/DeepScaleR-Preview-Dataset"
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--local_dir", default="~/data/deepscaler")
+    parser.add_argument("--local_dir", default="/data/deepscaler")
 
     args = parser.parse_args()
 

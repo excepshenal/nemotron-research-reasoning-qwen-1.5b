@@ -53,13 +53,11 @@ trainer_logger='["console","wandb"]'
 project_name='dapo'
 exp_name='ds-r1-distill-qwen-1.5b-exp-0'
 
-PROJECT_DIR=${PROJECT_DIR:-"${HOME}/nemotron-research-reasoning-qwen-1.5b"}
-MODEL_PATH=${MODEL_PATH:-"${HOME}/models/ds-r1-distill-qwen-1.5b"}
-TRAIN_FILE=${TRAIN_FILE:-"${HOME}/data/deepscaler/train.parquet"}
-TEST_FILE=${TEST_FILE:-"${HOME}/data/aime24/test.parquet"}
+PROJECT_DIR=${PROJECT_DIR:-"/workspace/nemotron-research-reasoning-qwen-1.5b"}
+MODEL_PATH=${MODEL_PATH:-"/models/ds-r1-distill-qwen-1.5b"}
+TRAIN_FILE=${TRAIN_FILE:-"/data/deepscaler/train.parquet"}
+TEST_FILE=${TEST_FILE:-"/data/aime24/test.parquet"}
 
-# Ray
-RAY_ADDRESS=${RAY_ADDRESS:-"http://localhost:8265"}
 WORKING_DIR=${WORKING_DIR:-"${PROJECT_DIR}"}
 RUNTIME_ENV=${RUNTIME_ENV:-"${PROJECT_DIR}/dapo/runtime_env.yaml"}
 

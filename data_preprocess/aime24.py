@@ -14,7 +14,7 @@ def main():
     data_source = "math-ai/aime24"
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--local_dir", default="~/data/aime24")
+    parser.add_argument("--local_dir", default="/data/aime24")
 
     args = parser.parse_args()
 
