@@ -37,7 +37,21 @@ rollout_disable_log_stats=False # per verl/docs/perf/perf_tuning.rst
 enable_chunked_prefill=False # prompts are short
 tensor_model_parallel_size=1 # 1.5b model doesn't need TP
 
+# Training
+
+# initial attempt
+trainer_nnodes=1
+trainer_n_gpus_per_node=8
+trainer_epochs=1 # DeepScaleR contains ~40k rows; with batches of 256, this is around 150 training steps
+trainer_log_val_generations=2
+trainer_save_freq=50 # save model every 50 steps
+trainer_test_freq=5 # eval model every 5 steps
+trainer_logger='["console","wandb"]'
+
 # Filepaths
+
+project_name='dapo'
+exp_name='ds-r1-distill-qwen-1.5b-exp-0'
 
 PROJECT_DIR=${PROJECT_DIR:-"${HOME}/nemotron-research-reasoning-qwen-1.5b"}
 MODEL_PATH=${MODEL_PATH:-"${HOME}/models/ds-r1-distill-qwen-1.5b"}
@@ -88,3 +102,12 @@ ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     algorithm.adv_estimator=grpo \
     custom_reward_function.path=${PROJECT_DIR}/reward/rllm_reward.py \
     custom_reward_function.name=rllm_reward_fn_math_transformed \
+    trainer.nnodes=${trainer_nnodes} \
+    trainer.n_gpus_per_node=${trainer_n_gpus_per_node} \
+    trainer.total_epochs=${trainer_epochs} \
+    trainer.log_val_generations=${trainer_log_val_generations} \
+    trainer.save_freq=${trainer_save_freq} \
+    trainer.test_freq=${trainer_test_freq} \
+    trainer.logger=${trainer_logger} \
+    trainer.project_name=${project_name} \
+    trainer.experiment_name=${exp_name}

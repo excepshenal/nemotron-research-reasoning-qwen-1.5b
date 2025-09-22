@@ -15,13 +15,10 @@ python3 data_preprocess/deepscaler.py
 python3 data_preprocess/aime24.py
 ```
 
-4. TODO: Submit the job to the Ray cluster **from any machine**:
+4. Submit the job to the Ray cluster **from any machine**:
 
 ```bash
-cd verl # Repo root
-export RAY_ADDRESS="http://${RAY_IP:-localhost}:8265" # The Ray cluster address to connect to
-export WORKING_DIR="${PWD}" # The local directory to package to the Ray cluster
-# Set the runtime environment like env vars and pip packages for the Ray cluster in yaml
-export RUNTIME_ENV="./recipe/dapo/runtime_env.yaml" # This sets environment variables for the Ray cluster
-bash recipe/dapo/run_dapo_qwen2.5_32b.sh # or other scripts
+cd nemotron-research-reasoning-qwen-1.5b # repo root
+export WANDB_API_KEY=<your_wandb_api_key>
+bash dapo/run_dapo_ds_r1_distill_qwen_1.5b.sh
 ```
